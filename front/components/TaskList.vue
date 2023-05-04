@@ -1,17 +1,17 @@
 <template>
   <v-card>
     <v-card-title>
-      Article List
+      Task List
       <v-spacer></v-spacer>
       <v-text-field v-model="search" label="Search" single-line hide-details></v-text-field>
     </v-card-title>
-    <v-data-table :headers="headers" :items="articles" :search="search"></v-data-table>
+    <v-data-table :headers="headers" :items="tasks" :search="search"></v-data-table>
   </v-card>
 </template>
 
 <script>
 export default {
-  props: ["articles"],
+  props: ["tasks"],
   data() {
     return {
       search: "",

@@ -1,25 +1,22 @@
 <template>
   <div>
-    <AddArticle @submit="addArticle" />
-    <ArticleList :articles="articles" />
+    <TaskList :tasks="tasks" />
   </div>
 </template>
 <script>
-  import AddArticle from "@/components/AddArticle";
-  import ArticleList from "@/components/ArticleList";
+  import TaskList from "@/components/TaskList";
   export default {
     components: {
-      AddArticle,
-      ArticleList,
+      TaskList,
     },
     data() {
       return {
-        articles: [],
+        tasks: [],
       };
     },
     methods: {
-      addArticle(title) {
-        this.articles.push({
+      addTask(title) {
+        this.tasks.push({
           title
         });
       },
