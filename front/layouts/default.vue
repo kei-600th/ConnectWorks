@@ -29,9 +29,11 @@
 
               <!-- ここにプロジェクト作成用ボックスを作成する -->
               <v-text-field 
-              label="プロジェクト作成" 
-              append-outer-icon="mdi-send"
+              label="プロジェクト作成"
               required>
+                <template #append-outer>
+                  <v-btn color="primary">作成</v-btn>
+                </template>
               </v-text-field>
 
             </v-card>
