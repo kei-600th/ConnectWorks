@@ -3,33 +3,39 @@
     <v-card-title>
       Task List
       <v-spacer></v-spacer>
-      <v-text-field v-model="search" label="Search" single-line hide-details></v-text-field>
+      <v-text-field
+        v-model="search"
+        label="Search"
+        single-line
+        hide-details
+      ></v-text-field>
     </v-card-title>
-    <v-data-table :headers="headers" :items="tasks" :search="search"></v-data-table>
+    <v-data-table
+      :headers="headers"
+      :items="tasks"
+      :search="search"
+    ></v-data-table>
   </v-card>
 </template>
 
 <script>
 export default {
-  props: ["tasks"],
+  props: ['tasks'],
   data() {
     return {
-      search: "",
+      search: '',
       headers: [
         {
-          text: "タイトル",
-          align: "left",
+          text: 'タイトル',
+          align: 'left',
           sortable: false,
-          value: "title"
+          value: 'title',
         },
-        { text: "ユーザー名", 
-          value: "username"
-        }
-      ]
-    };
-  }
-};
+        { text: 'ユーザー名', value: 'username' },
+      ],
+    }
+  },
+}
 </script>
 
-<style>
-</style>
+<style></style>

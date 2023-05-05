@@ -1,13 +1,7 @@
 <template>
   <v-app dark>
     <div>
-      <v-app-bar
-        app
-        color="deep-purple-accent-4"
-        dense
-        dark
-        clippedLeft
-      >
+      <v-app-bar app color="deep-purple-accent-4" dense dark clipped-left>
         <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
         <v-btn>MyProject</v-btn>
@@ -17,21 +11,10 @@
         <v-btn icon>
           <v-icon>mdi mdi-account-circle</v-icon>
         </v-btn>
-
       </v-app-bar>
 
-
-      <v-navigation-drawer
-        app
-        dark
-        clipped
-        :width="200"
-        v-model="drawer"
-      >
-        <v-list
-          nav
-          dense
-        >
+      <v-navigation-drawer v-model="drawer" app dark clipped :width="200">
+        <v-list nav dense>
           <v-list-item>
             <v-list-item-title>タスクの追加</v-list-item-title>
           </v-list-item>
