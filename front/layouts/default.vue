@@ -4,11 +4,9 @@
       <v-app-bar app color="deep-purple-accent-4" dense dark clipped-left>
         <v-app-bar-nav-icon></v-app-bar-nav-icon>
         <v-toolbar-title>ConnectWorks</v-toolbar-title>
-
-        
-
-          <v-menu offset-y nudge-bottom="16px">
+          <v-menu offset-y nudge-bottom="16px" :close-on-content-click="closeOnContentClick">
             <template #activator="{ on, attrs }">
+              <!-- ボタンを押すとドロップダウンメニューが展開される -->
               <v-btn
                 color="primary"
                 dark
@@ -18,14 +16,25 @@
                 プロジェクト
               </v-btn>
             </template>
-            <v-list>
-              <v-list-item
-                v-for="(item, index) in items"
-                :key="index"
-              >
-                <v-list-item-title>{{ item.title }}</v-list-item-title>
-              </v-list-item>
-            </v-list>
+            <v-card width="300px">
+
+              <v-list>
+                <v-list-item
+                  v-for="(item, index) in items"
+                  :key="index"
+                >
+                  <v-list-item-title>{{ item.title }}</v-list-item-title>
+                </v-list-item>
+              </v-list>
+
+              <!-- ここにプロジェクト作成用ボックスを作成する -->
+              <v-text-field 
+              label="プロジェクト作成" 
+              append-outer-icon="mdi-send"
+              required>
+              </v-text-field>
+
+            </v-card>
           </v-menu>
 
 
@@ -35,7 +44,7 @@
         </v-btn>
       </v-app-bar>
 
-      <v-navigation-drawer v-model="drawer" app dark clipped :width="200">
+      <v-navigation-drawer app dark clipped :width="200">
         <v-list nav dense>
           <v-list-item>
             <v-list-item-title>タスクの追加</v-list-item-title>
@@ -60,11 +69,12 @@
   export default {
     data: () => ({
       items: [
-        { title: 'Click Me' },
-        { title: 'Click Me' },
-        { title: 'Click Me' },
-        { title: 'Click Me 2' },
+        { title: 'プロジェクト1' },
+        { title: 'プロジェクト2' },
+        { title: 'プロジェクト3' },
+        { title: 'プロジェクト4' },
       ],
+      closeOnContentClick: false,
     }),
   }
 </script>
