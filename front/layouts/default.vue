@@ -20,16 +20,16 @@
 
               <v-list>
                 <v-list-item
-                  v-for="(item, index) in items"
+                  v-for="(project, index) in projects"
                   :key="index"
                 >
-                  <v-list-item-title>{{ item.title }}</v-list-item-title>
+                  <v-list-item-title>{{ project.record.name }}</v-list-item-title>
                 </v-list-item>
               </v-list>
 
               <!-- ここにプロジェクト作成用ボックスを作成する -->
               <v-text-field 
-              v-model="project.name"
+              v-model="newProject.name"
               label="プロジェクト作成"
               required>
                 <template #append-outer>
@@ -74,24 +74,31 @@ import axios from "@/plugins/axios";
   export default {
     data(){
       return {
-        items: [
-          { title: 'プロジェクト1' },
-          { title: 'プロジェクト2' },
-          { title: 'プロジェクト3' },
-          { title: 'プロジェクト4' },
-        ],
+        projects: [],
         closeOnContentClick: false,
-        project:{ name:''},
+        newProject:{ name:''},
       };
     },
-
-
+    mounted() {
+      this.getProjects();
+    },
     methods: {
+      async getProjects(){
+        await axios.get("/v1/projects")
+        .then((res) => {
+          this.projects = res.data.map((data) => {
+              return {
+                record: data
+              }
+          });
+        });
+      },
+
       async handleSubmit() {
-        console.log(this.project.name);
-        await axios.post("/v1/projects", this.project); 
-        this.project.name = "";
+        await axios.post("/v1/projects", this.newProject); 
+        this.newProject.name = "";
+        await this.getProjects(); 
       }
-    }
+    },
   }
 </script>
