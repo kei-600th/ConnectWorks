@@ -6,7 +6,6 @@ class V1::ProjectsController < ApplicationController
   end
 
   def create
-    puts params
     project = Project.new(project_params)
     if project.save
       render json: project

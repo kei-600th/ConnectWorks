@@ -29,6 +29,7 @@
 
               <!-- ここにプロジェクト作成用ボックスを作成する -->
               <v-text-field 
+              v-model="project.name"
               label="プロジェクト作成"
               required>
                 <template #append-outer>
@@ -68,19 +69,28 @@
 </template>
 
 <script>
+import axios from "@/plugins/axios";  
+
   export default {
-    data: () => ({
-      items: [
-        { title: 'プロジェクト1' },
-        { title: 'プロジェクト2' },
-        { title: 'プロジェクト3' },
-        { title: 'プロジェクト4' },
-      ],
-      closeOnContentClick: false,
-    }),
+    data(){
+      return {
+        items: [
+          { title: 'プロジェクト1' },
+          { title: 'プロジェクト2' },
+          { title: 'プロジェクト3' },
+          { title: 'プロジェクト4' },
+        ],
+        closeOnContentClick: false,
+        project:{ name:''},
+      };
+    },
+
+
     methods: {
-      handleSubmit() {
-        console.log("hello");
+      async handleSubmit() {
+        console.log(this.project.name);
+        await axios.post("/v1/projects", this.project); 
+        this.project.name = "";
       }
     }
   }
