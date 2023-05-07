@@ -14,10 +14,10 @@ class V1::ProjectsController < ApplicationController
     end
   end
 
-    # ストロングパラメーターの設定
-    def project_params
-      params.require(:project).permit(:name,)
-    end
+  # ストロングパラメーターの設定
+  def project_params
+    params.require(:project).permit(:name)
+  end
 
 
 
