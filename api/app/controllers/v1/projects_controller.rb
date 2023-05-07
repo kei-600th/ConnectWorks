@@ -1,5 +1,4 @@
 class V1::ProjectsController < ApplicationController
-
   def index
     project = Project.all
     render json: project
@@ -14,12 +13,8 @@ class V1::ProjectsController < ApplicationController
     end
   end
 
-    # ストロングパラメーターの設定
-    def project_params
-      params.require(:project).permit(:name,)
-    end
-
-
-
-
+  # ストロングパラメーターの設定
+  def project_params
+    params.require(:project).permit(:name)
+  end
 end
