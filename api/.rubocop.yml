@@ -1,0 +1,24 @@
+inherit_from: .rubocop_todo.yml
+
+require:
+  - rubocop-rails
+  - rubocop-performance
+  - rubocop-rspec
+
+AllCops:
+  SuggestExtensions: false
+  # 最新のルールを適用する
+  NewCops: enable
+  # 何のルールに引っかかったか表示する
+  DisplayCopNames: true
+  # rubocop対象外(リポジトリ毎で調節)
+  Exclude:
+    - "Gemfile"
+    - "bin/**/*"
+    - "db/**/*"
+    - "log/**/*"
+    - "tmp/**/*"
+    - "vendor/**/*"
+    - "lib/tasks/auto_annotate_models.rake"
+    - "config/environments/*"
+    - "config/puma.rb"
