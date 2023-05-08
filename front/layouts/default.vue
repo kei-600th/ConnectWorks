@@ -17,7 +17,7 @@
           </template>
           <v-card width="300px">
             <v-list>
-              <v-list-item v-for="(project, index) in projects" :key="index" :to="`/ProjectPage/${project.record.id}`">
+              <v-list-item v-for="(project, index) in projects" :key="index" :to="`/projects/${project.record.id}`">
                 <v-list-item-title>{{ project.record.name }}</v-list-item-title>
               </v-list-item>
             </v-list>
@@ -43,6 +43,9 @@
 
       <v-navigation-drawer app dark clipped :width="200">
         <v-list nav dense>
+          <v-list-item>
+            <v-list-item-title>ホーム</v-list-item-title>
+          </v-list-item>
           <v-list-item>
             <v-list-item-title>タスクの追加</v-list-item-title>
           </v-list-item>
