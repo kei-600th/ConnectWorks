@@ -15,6 +15,11 @@ class V1::ProjectsController < ApplicationController
     end
   end
 
+  def show
+    project = Project.find(params[:id])
+    render json: project
+  end
+
   # ストロングパラメーターの設定
   def project_params
     params.require(:project).permit(:name)
