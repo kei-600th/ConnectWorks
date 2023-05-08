@@ -88,20 +88,24 @@ export default {
     },
 
     async handleSubmit() {
-      try {
-        await axios.post('/v1/projects', this.newProject)
-        this.newProject.name = ''
-        await this.getProjects()
-      } catch (error) {
-        if (error.response && error.response.data) {
-          // エラーメッセージを取得
-          const messages = Object.values(error.response.data)
+      if (this.newProject.name !== ''){
+        try {
+          await axios.post('/v1/projects', this.newProject)
+          this.newProject.name = ''
+          await this.getProjects()
+        } catch (error) {
+          if (error.response && error.response.data) {
+            // エラーメッセージを取得
+            const messages = Object.values(error.response.data)
 
-          // アラートを表示
-          alert(`Error: ${messages.join(', ')}`)
-        } else {
-          alert('Error: プロジェクトの作成に失敗しました。')
+            // アラートを表示
+            alert(`Error: ${messages.join(', ')}`)
+          } else {
+            alert('Error: プロジェクトの作成に失敗しました。')
+          }
         }
+      } else{
+        alert('プロジェクト名を入力してください')
       }
     },
   },
