@@ -17,7 +17,7 @@
           </template>
           <v-card width="300px">
             <v-list>
-              <v-list-item v-for="(project, index) in projects" :key="index">
+              <v-list-item v-for="(project, index) in projects" :key="index" :to="`/ProjectDetail/${project.record.id}`">
                 <v-list-item-title>{{ project.record.name }}</v-list-item-title>
               </v-list-item>
             </v-list>
