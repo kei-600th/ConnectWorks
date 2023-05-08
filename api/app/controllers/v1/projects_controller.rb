@@ -7,9 +7,11 @@ class V1::ProjectsController < ApplicationController
   def create
     project = Project.new(project_params)
     if project.save
-      render json: project
+      # 成功した場合にはHTTPステータスコード 201 Created をクライアントに返す
+      render json: project, status: :created
     else
-      render json: project.errors
+      # 失敗した場合にはHTTPステータスコード 422 Unprocessable Entity をクライアントに返す
+      render json: project.errors, status: :unprocessable_entity
     end
   end
 
