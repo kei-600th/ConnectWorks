@@ -84,7 +84,7 @@ export default {
     },
 
     async handleSubmit() {
-      if (this.newProject.name !== ''){
+      if (this.newProject.name !== '') {
         try {
           await axios.post('/v1/projects', this.newProject)
           this.newProject.name = ''
@@ -100,7 +100,7 @@ export default {
             alert('Error: プロジェクトの作成に失敗しました。')
           }
         }
-      } else{
+      } else {
         alert('プロジェクト名を入力してください')
       }
     },

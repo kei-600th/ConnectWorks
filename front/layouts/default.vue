@@ -8,5 +8,4 @@
   </v-app>
 </template>
 
-<script>
-</script>
+<script></script>
