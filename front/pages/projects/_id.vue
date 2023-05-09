@@ -1,12 +1,17 @@
 <template>
   <div>
+    <SideBar />
     {{ projectName }}
   </div>
 </template>
 <script>
 import axios from '@/plugins/axios'
+import SideBar from '@/components/SideBar'
 
 export default {
+  components: {
+    SideBar,
+  },
   data() {
     return {
       projectName: "",
