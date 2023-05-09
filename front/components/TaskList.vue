@@ -1,21 +1,22 @@
 <template>
   <div class="status-container">
     <div
-      v-for="(status, index) in statuses"
-      :key="index"
+      v-for="(status, statusIndex) in statuses"
+      :key="statusIndex"
       class="status-column"
     >
       {{ status.name }}
       <v-list style="border-radius:5px;">
         <v-card 
-          v-for="(item, index) in items"
-          :key="index"
+          v-for="(task, taskIndex) in status.tasks"
+          :key="taskIndex"
           color="#385F73" dark width="90%" 
           style="margin:20px auto;"
         >
-          <v-card-subtitle>{{ item.title }}</v-card-subtitle>
+          <v-card-subtitle>{{ task.title }}</v-card-subtitle>
           <v-card-text>cardtext</v-card-text>
         </v-card>
+        <v-btn @click="addTask(statusIndex)">タスクの追加</v-btn>
       </v-list>
     </div>
   </div>
@@ -25,20 +26,19 @@
 export default {
   data() {
     return {
-      items: [
-        { title: 'コードを書く' },
-        { title: 'テストコードを書く' },
-        { title: 'コードレビューをする' },
-        { title: 'リファクタリングする' },
-
-      ],
       statuses: [
-        { name: '未実施' },
-        { name: '実施中' },
-        { name: '実施済み' },
-        { name: '完了' },
+        { name: '未実施', tasks: [] },
+        { name: '実施中', tasks: [] },
+        { name: '実施済み', tasks: [] },
+        { name: '完了', tasks: [] },
       ],
     }
+  },
+  methods: {
+    addTask(index) {
+      const newTask = { title: '新しいタスク' }; // タスクの初期値
+      this.statuses[index].tasks.push(newTask);
+    },
   },
 }
 </script>
