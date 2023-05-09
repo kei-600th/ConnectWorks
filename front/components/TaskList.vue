@@ -13,8 +13,18 @@
           color="#385F73" dark width="90%" 
           style="margin:20px auto;"
         >
-          <v-card-subtitle>{{ task.title }}</v-card-subtitle>
-          <v-card-text>cardtext</v-card-text>
+          <v-card-subtitle>
+              <v-text-field
+              v-model=task.title
+              label="新規のタスク">
+              </v-text-field>
+            </v-card-subtitle>
+          <v-card-text>
+            <v-btn
+            color="#385F73">
+            追加
+            </v-btn>
+          </v-card-text>
         </v-card>
         <v-btn @click="addTask(statusIndex)">タスクの追加</v-btn>
       </v-list>
