@@ -15,13 +15,15 @@
         >
           <v-card-subtitle>
               <v-text-field
-              v-model=task.title
+              v-model=task.name
               label="新規のタスク">
               </v-text-field>
             </v-card-subtitle>
           <v-card-text>
             <v-btn
-            color="#385F73">
+            color="#385F73"
+            @click="taskSubmit"
+            >
             追加
             </v-btn>
           </v-card-text>
@@ -33,7 +35,14 @@
 </template>
 
 <script>
+import axios from '@/plugins/axios'
 export default {
+  props: {
+  id: {
+    type: Number,
+    default: null,
+  },
+},
   data() {
     return {
       statuses: [
@@ -42,12 +51,16 @@ export default {
         { name: '実施済み', tasks: [] },
         { name: '完了', tasks: [] },
       ],
+      newTask : { name: '', status: '', project_id: null}
     }
   },
   methods: {
     addTask(index) {
-      const newTask = { title: '新しいタスク' }; // タスクの初期値
-      this.statuses[index].tasks.push(newTask);
+      this.newTask = { name: '新しいタスク', status: this.statuses[index].name,project_id:this.id}; // タスクの初期値
+      this.statuses[index].tasks.push(this.newTask);
+    },
+    async taskSubmit() {
+      await axios.post('/v1/tasks', this.newTask)
     },
   },
 }
