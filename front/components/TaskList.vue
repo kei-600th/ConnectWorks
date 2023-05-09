@@ -24,7 +24,6 @@
 
 <script>
 export default {
-  props: ['tasks'],
   data() {
     return {
       items: [

@@ -2,7 +2,7 @@
   <div>
     <SideBar />
     {{ projectName }}
-    <TaskList :tasks="tasks" />
+    <TaskList />
   </div>
 </template>
 <script>
