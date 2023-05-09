@@ -1,6 +1,5 @@
 <template>
-  <v-app dark>
-    <div>
+  <v-app dark >
       <v-app-bar app color="deep-purple-accent-4" dense dark clipped-left>
         <v-app-bar-nav-icon></v-app-bar-nav-icon>
         <v-toolbar-title>ConnectWorks</v-toolbar-title>
@@ -40,10 +39,9 @@
           <v-icon>mdi mdi-account-circle</v-icon>
         </v-btn>
       </v-app-bar>
-      <v-main>
+      <v-main >
         <Nuxt />
       </v-main>
-    </div>
   </v-app>
 </template>
 

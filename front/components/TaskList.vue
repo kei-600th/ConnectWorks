@@ -34,7 +34,7 @@ export default {
         { title: 'リファクタリングする' },
         { title: 'リファクタリングする' },
         { title: 'リファクタリングする' },
-        
+
       ],
       statuses: [
         { name: '未実施' },
