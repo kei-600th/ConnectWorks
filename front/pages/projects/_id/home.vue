@@ -2,7 +2,7 @@
   <div>
     <SideBar />
     {{ projectName }}
-    <TaskList />
+    <TaskList v-if="id !== null" :id="id" />
   </div>
 </template>
 <script>
@@ -18,6 +18,7 @@ export default {
   data() {
     return {
       projectName: "",
+      id: null,
     }
   },
   mounted() {
@@ -25,9 +26,10 @@ export default {
   },
   methods: {
     async getProject() {
-      const id = this.$route.params.id
+      const id = Number(this.$route.params.id)
       await axios.get(`/v1/projects/${id}`).then((res) => {
         this.projectName = res.data.name
+        this.id = id 
       })
     }
   }
