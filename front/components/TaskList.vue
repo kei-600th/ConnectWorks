@@ -1,21 +1,25 @@
 <template>
-  <v-card>
-    <v-card-title>
-      Task List
-      <v-spacer></v-spacer>
-      <v-text-field
-        v-model="search"
-        label="Search"
-        single-line
-        hide-details
-      ></v-text-field>
-    </v-card-title>
-    <v-data-table
-      :headers="headers"
-      :items="tasks"
-      :search="search"
-    ></v-data-table>
-  </v-card>
+  <v-row style="height:100;">
+    <v-col
+    v-for="(status, index) in statuses"
+    :key="index"
+    >
+      {{ status.name }}
+      <v-list style="border-radius:5px;">
+        <v-list-item
+          v-for="(item, index) in items"
+          :key="index"
+          style="height:100%;width:100%;padding:10px 0; display:flex; align-items: center;"
+        >
+        <v-card color="#385F73" dark width="90%" >
+          <v-card-subtitle>{{ item.title }}</v-card-subtitle>
+          <v-card-text>cardtext
+          </v-card-text>
+        </v-card>
+        </v-list-item>
+      </v-list>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -23,15 +27,17 @@ export default {
   props: ['tasks'],
   data() {
     return {
-      search: '',
-      headers: [
-        {
-          text: 'タイトル',
-          align: 'left',
-          sortable: false,
-          value: 'title',
-        },
-        { text: 'ユーザー名', value: 'username' },
+      items: [
+        { title: 'コードを書く' },
+        { title: 'テストコードを書く' },
+        { title: 'コードレビューをする' },
+        { title: 'リファクタリングする' },
+      ],
+      statuses: [
+        { name: '未実施' },
+        { name: '実施中' },
+        { name: '実施済み' },
+        { name: '完了' },
       ],
     }
   },

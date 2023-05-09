@@ -2,15 +2,18 @@
   <div>
     <SideBar />
     {{ projectName }}
+    <TaskList :tasks="tasks" />
   </div>
 </template>
 <script>
 import axios from '@/plugins/axios'
 import SideBar from '@/components/SideBar'
+import TaskList from '@/components/TaskList'
 
 export default {
   components: {
     SideBar,
+    TaskList,
   },
   data() {
     return {
