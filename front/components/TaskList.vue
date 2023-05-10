@@ -86,10 +86,22 @@ export default {
       this.addTaskDisabled = true;
     },
     async taskSubmit() {
-      await axios.post('/v1/tasks', this.newTask)
-      this.newTask.isNew = null;
-      this.addTaskDisabled = false
-      this.$emit('taskSubmitted');
+      try {
+        await axios.post('/v1/tasks', this.newTask)
+        this.newTask.isNew = null;
+        this.addTaskDisabled = false
+        this.$emit('taskSubmitted');
+        } catch (error) {
+          if (error.response && error.response.data) {
+            // エラーメッセージを取得
+            const messages = Object.values(error.response.data)
+
+            // アラートを表示
+            alert(`Error: ${messages.join(', ')}`)
+          } else {
+            alert('Error: プロジェクトの作成に失敗しました。')
+          }
+        }
     },
     canselAddTask(index){
       this.statuses[index].tasks.pop();
