@@ -2,7 +2,7 @@
   <div>
     <SideBar />
     {{ project.name }}
-    <TaskList v-if="project.id !== null" :project="project"  @taskSubmitted="getProject"/>
+    <TaskList v-if="isProjectLoaded" :project="project"  @taskSubmitted="getProject"/>
   </div>
 </template>
 <script>
@@ -22,6 +22,11 @@ export default {
       }
     }
   },
+  computed: {
+    isProjectLoaded() {
+      return this.project.id !== null;
+    },
+  },
   mounted() {
     this.getProject()
   },
@@ -36,7 +41,5 @@ export default {
     }
   }
 }
-
-
 </script>
 <style></style>
