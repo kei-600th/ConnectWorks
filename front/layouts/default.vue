@@ -9,7 +9,6 @@
           :close-on-content-click="closeOnContentClick"
         >
           <template #activator="{ on, attrs }">
-            <!-- ボタンを押すとドロップダウンメニューが展開される -->
             <v-btn color="primary" dark v-bind="attrs" v-on="on">
               プロジェクト
             </v-btn>
@@ -20,8 +19,6 @@
                 <v-list-item-title>{{ project.record.name }}</v-list-item-title>
               </v-list-item>
             </v-list>
-
-            <!-- ここにプロジェクト作成用ボックスを作成する -->
             <v-text-field
               v-model="newProject.name"
               label="プロジェクト作成"
@@ -33,7 +30,6 @@
             </v-text-field>
           </v-card>
         </v-menu>
-
         <v-spacer></v-spacer>
         <v-btn icon>
           <v-icon>mdi mdi-account-circle</v-icon>
@@ -61,13 +57,8 @@ export default {
   },
   methods: {
     async getProjects() {
-      await axios.get('/v1/projects').then((res) => {
-        this.projects = res.data.map((data) => {
-          return {
-            record: data,
-          }
-        })
-      })
+      const { data } = await axios.get('/v1/projects');
+      this.projects = data.map((data) => ({ record: data }));
     },
 
     async handleSubmit() {
