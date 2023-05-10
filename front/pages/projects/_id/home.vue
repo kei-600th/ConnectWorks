@@ -33,12 +33,15 @@ export default {
   methods: {
     async getProject() {
       const id = Number(this.$route.params.id)
-      await axios.get(`/v1/projects/${id}`).then((res) => {
-        this.project.name = res.data.name
-        this.project.id = id 
-        this.project.tasks = res.data.tasks
-      })
-    }
+      try {
+        const { data } = await axios.get(`/v1/projects/${id}`);
+        this.project.name = data.name;
+        this.project.id = id;
+        this.project.tasks = data.tasks;
+      } catch (error) {
+        console.error(error);
+      }
+    },
   }
 }
 </script>
