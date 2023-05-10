@@ -2,7 +2,7 @@
   <div>
     <SideBar />
     {{ projectName }}
-    <TaskList v-if="id !== null" :id="id" />
+    <TaskList v-if="id !== null" :id="id" :project="project"/>
   </div>
 </template>
 <script>

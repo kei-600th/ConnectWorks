@@ -42,6 +42,16 @@ export default {
     type: Number,
     default: null,
   },
+  project: {
+    type: Object,
+    default: function() {
+      return {
+        id: null,
+        name: "",
+        tasks: [],
+      }
+    },
+  },
 },
   data() {
     return {
