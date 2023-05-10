@@ -86,6 +86,7 @@ export default {
       this.addTaskDisabled = true;
     },
     async taskSubmit() {
+      if (this.newTask.name !== '') {
       try {
         await axios.post('/v1/tasks', this.newTask)
         this.newTask.isNew = null;
@@ -102,6 +103,9 @@ export default {
             alert('Error: プロジェクトの作成に失敗しました。')
           }
         }
+        } else {
+        alert('タスク名を入力してください')
+      }
     },
     canselAddTask(index){
       this.statuses[index].tasks.pop();
