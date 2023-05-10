@@ -60,6 +60,14 @@ export default {
       newTask : { name: '', status: '', project_id: null}
     }
   },
+  created() {
+    this.project.tasks.forEach(task => {
+      const status = this.statuses.find(status => status.name === task.status);
+      if (status) {
+        status.tasks.push(task);
+      }
+    });
+  },
   methods: {
     addTask(index) {
       this.newTask = { name: '新しいタスク', status: this.statuses[index].name,project_id:this.project.id}; // タスクの初期値
