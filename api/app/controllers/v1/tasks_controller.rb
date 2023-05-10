@@ -1,7 +1,7 @@
 class V1::TasksController < ApplicationController
   def index
     task = Task.all
-    render json: project
+    render json: task
   end
 
   def create
