@@ -106,7 +106,7 @@ export default {
         const messages = Object.values(error.response.data);
         alert(`Error: ${messages.join(', ')}`);
       } else {
-        alert('Error: プロジェクトの作成に失敗しました。');
+        alert('Error: タスクの作成に失敗しました。');
       }
     }
   },
