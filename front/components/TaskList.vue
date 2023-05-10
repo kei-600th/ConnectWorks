@@ -50,13 +50,11 @@ export default {
   props: {
   project: {
     type: Object,
-    default: function() {
-      return {
-        id: null,
-        name: "",
-        tasks: [],
-      }
-    },
+    default: () => ({
+      id: null,
+      name: "",
+      tasks: [],
+    }),
   },
 },
   data() {
