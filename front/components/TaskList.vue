@@ -6,12 +6,11 @@
       class="status-column"
     >
       {{ status.name }}
-      <v-list style="border-radius:5px;">
+      <v-list class="rounded-list">
         <v-card 
           v-for="(task, taskIndex) in status.tasks"
           :key="taskIndex"
-          color="#385F73" dark width="90%" 
-          style="margin:20px auto;"
+          color="#385F73" class="styled-card"
         >
           <v-card-subtitle>
             <v-text-field
@@ -113,7 +112,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .status-container {
   display: flex;
 }
@@ -121,5 +120,14 @@ export default {
 .status-column {
   flex: 1;
   margin-right: 10px;
+}
+
+.rounded-list {
+  border-radius: 5px;
+}
+
+.styled-card {
+  width: 90%;
+  margin: 20px auto;
 }
 </style>
