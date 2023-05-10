@@ -19,6 +19,9 @@ export default {
     return {
       projectName: "",
       id: null,
+      project:{
+        id: null, name: "", tasks: []
+      }
     }
   },
   mounted() {
@@ -29,7 +32,11 @@ export default {
       const id = Number(this.$route.params.id)
       await axios.get(`/v1/projects/${id}`).then((res) => {
         this.projectName = res.data.name
+        this.project.name = res.data.name
         this.id = id 
+        this.project.id = id 
+        this.project.tasks = res.data.tasks
+        console.log(this.project)
       })
     }
   }
