@@ -13,11 +13,10 @@ class V1::TasksController < ApplicationController
       # 失敗した場合にはHTTPステータスコード 422 Unprocessable Entity をクライアントに返す
       render json: task.errors, status: :unprocessable_entity
     end
-
   end
 
   # ストロングパラメーターの設定
   def task_params
-    params.require(:task).permit(:name,:status,:project_id)
+    params.require(:task).permit(:name, :status, :project_id)
   end
 end

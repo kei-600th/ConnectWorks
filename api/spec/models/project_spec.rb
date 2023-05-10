@@ -9,15 +9,12 @@ RSpec.describe Project, type: :model do
       project = FactoryBot.build(:project)
       expect(project).to be_valid
     end
-    
+
     it 'is invalid without a name' do
       project = FactoryBot.build(:project, name: nil)
       project.valid?
       expect(project.errors[:name]).to include("can't be blank")
     end
-
-    
-
   end
 
   describe 'associations' do
@@ -29,6 +26,4 @@ RSpec.describe Project, type: :model do
       expect { project.destroy }.to change { Task.count }.by(-2)
     end
   end
-
-  
 end

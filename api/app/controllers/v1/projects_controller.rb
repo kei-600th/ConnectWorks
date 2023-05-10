@@ -4,6 +4,11 @@ class V1::ProjectsController < ApplicationController
     render json: project
   end
 
+  def show
+    project = Project.find(params[:id])
+    render json: project
+  end
+
   def create
     project = Project.new(project_params)
     if project.save
@@ -13,11 +18,6 @@ class V1::ProjectsController < ApplicationController
       # 失敗した場合にはHTTPステータスコード 422 Unprocessable Entity をクライアントに返す
       render json: project.errors, status: :unprocessable_entity
     end
-  end
-
-  def show
-    project = Project.find(params[:id])
-    render json: project
   end
 
   # ストロングパラメーターの設定
