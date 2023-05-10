@@ -23,14 +23,20 @@
               {{ task.name }}
             </template>
           </v-card-subtitle>
-          <v-card-text v-if="task.isNew">
+          <v-card-actions v-if="task.isNew">
             <v-btn
             color="#385F73"
             @click="taskSubmit"
             >
             追加
             </v-btn>
-          </v-card-text>
+            <v-btn
+            color="#37474F"
+            @click="canselAddTask(statusIndex)"
+            >
+            取消
+            </v-btn>
+          </v-card-actions>
         </v-card>
         <v-btn :disabled="addTaskDisabled" @click="addTask(statusIndex)">タスクの追加</v-btn>
       </v-list>
@@ -85,6 +91,10 @@ export default {
       this.addTaskDisabled = false
       this.$emit('taskSubmitted');
     },
+    canselAddTask(index){
+      this.statuses[index].tasks.pop();
+      this.addTaskDisabled = false
+    }
   },
 }
 </script>
