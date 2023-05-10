@@ -91,23 +91,23 @@ export default {
         this.addTaskDisabled = false
         this.$emit('taskSubmitted');
         } catch (error) {
-          if (error.response && error.response.data) {
-            // エラーメッセージを取得
-            const messages = Object.values(error.response.data)
-
-            // アラートを表示
-            alert(`Error: ${messages.join(', ')}`)
-          } else {
-            alert('Error: プロジェクトの作成に失敗しました。')
-          }
+          this.handleError(error);
         }
-        } else {
+      } else {
         alert('タスク名を入力してください')
       }
     },
     cancelAddTask(index){
       this.statuses[index].tasks.pop();
       this.addTaskDisabled = false
+    },
+    handleError(error) {
+      if (error.response && error.response.data) {
+        const messages = Object.values(error.response.data);
+        alert(`Error: ${messages.join(', ')}`);
+      } else {
+        alert('Error: プロジェクトの作成に失敗しました。');
+      }
     }
   },
 }
