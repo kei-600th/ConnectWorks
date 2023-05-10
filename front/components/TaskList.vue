@@ -32,7 +32,7 @@
             </v-btn>
           </v-card-text>
         </v-card>
-        <v-btn @click="addTask(statusIndex)">タスクの追加</v-btn>
+        <v-btn :disabled="addTaskDisabled" @click="addTask(statusIndex)">タスクの追加</v-btn>
       </v-list>
     </div>
   </div>
@@ -61,7 +61,8 @@ export default {
         { name: '実施済み', tasks: [] },
         { name: '完了', tasks: [] },
       ],
-      newTask : { name: '', status: '', project_id: null, isNew: null}
+      newTask : { name: '', status: '', project_id: null, isNew: null},
+      addTaskDisabled: false
     }
   },
   created() {
@@ -76,10 +77,12 @@ export default {
     addTask(index) {
       this.newTask = { name: '新しいタスク', status: this.statuses[index].name,project_id:this.project.id, isNew: true}; // タスクの初期値
       this.statuses[index].tasks.push(this.newTask);
+      this.addTaskDisabled = true;
     },
     async taskSubmit() {
       await axios.post('/v1/tasks', this.newTask)
       this.newTask.isNew = null;
+      this.addTaskDisabled = false
       this.$emit('taskSubmitted');
     },
   },
