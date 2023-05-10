@@ -15,8 +15,20 @@ RSpec.describe Project, type: :model do
       project.valid?
       expect(project.errors[:name]).to include("can't be blank")
     end
+
     
 
-
   end
+
+  describe 'associations' do
+    let!(:project) { FactoryBot.create(:project) }
+    let!(:task1) { FactoryBot.create(:task, project: project) }
+    let!(:task2) { FactoryBot.create(:task, project: project) }
+
+    it 'deletes associated tasks when destroyed' do
+      expect { project.destroy }.to change { Task.count }.by(-2)
+    end
+  end
+
+  
 end
