@@ -66,7 +66,7 @@ export default {
   },
   methods: {
     addTask(index) {
-      this.newTask = { name: '新しいタスク', status: this.statuses[index].name,project_id:this.id}; // タスクの初期値
+      this.newTask = { name: '新しいタスク', status: this.statuses[index].name,project_id:this.project.id}; // タスクの初期値
       this.statuses[index].tasks.push(this.newTask);
     },
     async taskSubmit() {
