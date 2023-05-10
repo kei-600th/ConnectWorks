@@ -4,6 +4,11 @@ class V1::ProjectsController < ApplicationController
     render json: project
   end
 
+  def show
+    project = Project.find(params[:id])
+    render json: project
+  end
+
   def create
     project = Project.new(project_params)
     if project.save
