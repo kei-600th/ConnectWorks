@@ -78,7 +78,7 @@ export default {
   },
   methods: {
     addTask(index) {
-      this.newTask = { name: '新しいタスク', status: this.statuses[index].name,project_id:this.project.id, isNew: true}; // タスクの初期値
+      this.newTask = { name: '', status: this.statuses[index].name,project_id:this.project.id, isNew: true}; // タスクの初期値
       this.statuses[index].tasks.push(this.newTask);
       this.addTaskDisabled = true;
     },
