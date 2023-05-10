@@ -38,10 +38,6 @@
 import axios from '@/plugins/axios'
 export default {
   props: {
-  id: {
-    type: Number,
-    default: null,
-  },
   project: {
     type: Object,
     default: function() {

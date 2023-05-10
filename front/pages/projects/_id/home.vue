@@ -2,7 +2,7 @@
   <div>
     <SideBar />
     {{ projectName }}
-    <TaskList v-if="id !== null" :id="id" :project="project"/>
+    <TaskList v-if="project.id !== null" :project="project"/>
   </div>
 </template>
 <script>
@@ -18,7 +18,6 @@ export default {
   data() {
     return {
       projectName: "",
-      id: null,
       project:{
         id: null, name: "", tasks: []
       }
@@ -33,10 +32,8 @@ export default {
       await axios.get(`/v1/projects/${id}`).then((res) => {
         this.projectName = res.data.name
         this.project.name = res.data.name
-        this.id = id 
         this.project.id = id 
         this.project.tasks = res.data.tasks
-        console.log(this.project)
       })
     }
   }
