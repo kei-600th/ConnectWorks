@@ -2,7 +2,7 @@
   <div>
     <SideBar />
     {{ project.name }}
-    <TaskList v-if="project.id !== null" :project="project"/>
+    <TaskList v-if="project.id !== null" :project="project"  @taskSubmitted="getProject"/>
   </div>
 </template>
 <script>
