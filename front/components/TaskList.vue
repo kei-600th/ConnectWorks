@@ -32,7 +32,7 @@
             </v-btn>
             <v-btn
             color="#37474F"
-            @click="canselAddTask(statusIndex)"
+            @click="cancelAddTask(statusIndex)"
             >
             取消
             </v-btn>
@@ -107,7 +107,7 @@ export default {
         alert('タスク名を入力してください')
       }
     },
-    canselAddTask(index){
+    cancelAddTask(index){
       this.statuses[index].tasks.pop();
       this.addTaskDisabled = false
     }
