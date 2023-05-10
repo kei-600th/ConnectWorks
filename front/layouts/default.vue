@@ -77,18 +77,18 @@ export default {
           this.newProject.name = ''
           await this.getProjects()
         } catch (error) {
-          if (error.response && error.response.data) {
-            // エラーメッセージを取得
-            const messages = Object.values(error.response.data)
-
-            // アラートを表示
-            alert(`Error: ${messages.join(', ')}`)
-          } else {
-            alert('Error: プロジェクトの作成に失敗しました。')
-          }
+          this.handleError(error);
         }
       } else {
         alert('プロジェクト名を入力してください')
+      }
+    },
+    handleError(error) {
+      if (error.response && error.response.data) {
+        const messages = Object.values(error.response.data);
+        alert(`Error: ${messages.join(', ')}`);
+      } else {
+        alert('Error: プロジェクトの作成に失敗しました。');
       }
     },
   },
