@@ -1,49 +1,91 @@
 <template>
-  <div class="status-container">
-    <div
-      v-for="(status, statusIndex) in statuses"
-      :key="statusIndex"
-      class="status-column"
-    >
-      {{ status.name }}
-      <v-list class="rounded-list">
-        <div
-        v-for="(task, taskIndex) in status.tasks"
-        :key="taskIndex"
-        >
-          <v-card
-            v-if="task.isNew !== true"
-            color="#385F73"
-            class="styled-card"
+  <div>
+    <div class="status-container">
+      <div
+        v-for="(status, statusIndex) in statuses"
+        :key="statusIndex"
+        class="status-column"
+      >
+        {{ status.name }}
+        <v-list class="rounded-list">
+          <div
+          v-for="(task, taskIndex) in status.tasks"
+          :key="taskIndex"
           >
-            <v-card-subtitle>
-              {{ task.name }}
-            </v-card-subtitle>
-          </v-card>
-          <v-card
-            v-if="task.isNew"
-            color="#385F73"
-            class="styled-card">
-            <v-card-subtitle>
-              <v-text-field
-                  v-model="task.name"
-                  label="新規のタスク"
-                >
-              </v-text-field>
-            </v-card-subtitle>
-            <v-card-actions>
-              <v-btn color="#385F73" @click="taskSubmit"> 追加 </v-btn>
-              <v-btn color="#37474F" @click="cancelAddTask(statusIndex)">
-                取消
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </div>
-        <v-btn :disabled="addTaskDisabled" @click="addTask(statusIndex)"
-          >タスクの追加</v-btn
-        >
-      </v-list>
+            <v-card
+              v-if="task.isNew !== true"
+              color="#385F73"
+              class="styled-card"
+              @click="showModal(task)"
+            >
+              <v-card-subtitle>
+                {{ task.name }}
+              </v-card-subtitle>
+            </v-card>
+            <v-card
+              v-if="task.isNew"
+              color="#385F73"
+              class="styled-card">
+              <v-card-subtitle>
+                <v-text-field
+                    v-model="task.name"
+                    label="新規のタスク"
+                  >
+                </v-text-field>
+              </v-card-subtitle>
+              <v-card-actions>
+                <v-btn color="#385F73" @click="taskSubmit"> 追加 </v-btn>
+                <v-btn color="#37474F" @click="cancelAddTask(statusIndex)">
+                  取消
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </div>
+          <v-btn :disabled="addTaskDisabled" @click="addTask(statusIndex)"
+            >タスクの追加</v-btn
+          >
+        </v-list>
+      </div>
     </div>
+
+
+    <v-dialog
+      v-model="dialog"
+      width="500"
+    >
+      <v-card>
+        <v-card-title>
+          {{ showTask.name }}
+        </v-card-title>
+
+        <v-card-text>
+          タスクの説明を表示
+        </v-card-text>
+
+        <v-divider></v-divider>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="primary"
+            text
+            @click="dialog = false"
+          >
+            I accept
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+
+
+
+
+
+
+
+
+
   </div>
 </template>
 
@@ -70,6 +112,8 @@ export default {
       ],
       newTask: { name: '', status: '', project_id: null, isNew: null },
       addTaskDisabled: false,
+      dialog: false,
+      showTask: {}
     }
   },
   created() {
@@ -117,6 +161,10 @@ export default {
         alert('Error: タスクの作成に失敗しました。')
       }
     },
+    showModal(clickedTask){
+      this.showTask = clickedTask
+      this.dialog = true
+    }
   },
 }
 </script>
