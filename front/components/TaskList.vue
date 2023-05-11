@@ -7,30 +7,38 @@
     >
       {{ status.name }}
       <v-list class="rounded-list">
-        <v-card
-          v-for="(task, taskIndex) in status.tasks"
-          :key="taskIndex"
-          color="#385F73"
-          class="styled-card"
+        <div
+        v-for="(task, taskIndex) in status.tasks"
+        :key="taskIndex"
         >
-          <v-card-subtitle>
-            <v-text-field
-              v-if="task.isNew"
-              v-model="task.name"
-              label="新規のタスク"
-            >
-            </v-text-field>
-            <template v-else>
+          <v-card
+            v-if="task.isNew !== true"
+            color="#385F73"
+            class="styled-card"
+          >
+            <v-card-subtitle>
               {{ task.name }}
-            </template>
-          </v-card-subtitle>
-          <v-card-actions v-if="task.isNew">
-            <v-btn color="#385F73" @click="taskSubmit"> 追加 </v-btn>
-            <v-btn color="#37474F" @click="cancelAddTask(statusIndex)">
-              取消
-            </v-btn>
-          </v-card-actions>
-        </v-card>
+            </v-card-subtitle>
+          </v-card>
+          <v-card
+            v-if="task.isNew"
+            color="#385F73"
+            class="styled-card">
+            <v-card-subtitle>
+              <v-text-field
+                  v-model="task.name"
+                  label="新規のタスク"
+                >
+              </v-text-field>
+            </v-card-subtitle>
+            <v-card-actions>
+              <v-btn color="#385F73" @click="taskSubmit"> 追加 </v-btn>
+              <v-btn color="#37474F" @click="cancelAddTask(statusIndex)">
+                取消
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </div>
         <v-btn :disabled="addTaskDisabled" @click="addTask(statusIndex)"
           >タスクの追加</v-btn
         >
