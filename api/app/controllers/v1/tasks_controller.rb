@@ -17,6 +17,6 @@ class V1::TasksController < ApplicationController
 
   # ストロングパラメーターの設定
   def task_params
-    params.require(:task).permit(:name, :status, :project_id)
+    params.require(:task).permit(:name, :status, :describe, :project_id)
   end
 end
