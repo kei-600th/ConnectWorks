@@ -45,7 +45,7 @@ export default {
         this.project.id = id
         this.project.tasks = data.tasks
       } catch (error) {
-        console.error(error)
+        throw new Error(error);
       }
     },
   },
