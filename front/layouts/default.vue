@@ -18,9 +18,9 @@
             <v-list-item
               v-for="(project, index) in projects"
               :key="index"
-              :to="`/projects/${project.record.id}/home`"
+              :to="`/projects/${project.id}/home`"
             >
-              <v-list-item-title>{{ project.record.name }}</v-list-item-title>
+              <v-list-item-title>{{ project.name }}</v-list-item-title>
             </v-list-item>
           </v-list>
           <v-text-field
@@ -62,7 +62,7 @@ export default {
   methods: {
     async getProjects() {
       const { data } = await axios.get('/v1/projects')
-      this.projects = data.map((data) => ({ record: data }))
+      this.projects = data
     },
 
     async handleSubmit() {
