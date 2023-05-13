@@ -103,8 +103,10 @@ export default {
       ],
       newTask: [],
       addTaskDisabled: false,
+      // タスクの追加ボタンの可否
       dialog: false,
       addingStateId: null,
+      // 追加処理中のstatusesの番号
       showTask: {}
     }
   },
@@ -123,7 +125,7 @@ export default {
         status: this.statuses[index].name,
         project_id: this.project.id,
         isNew: true,
-      }) // タスクの初期値
+      })
       this.statuses[index].tasks.push(this.newTask[this.newTask.length - 1])
       this.addingStateId = index
       this.addTaskDisabled = true
