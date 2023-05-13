@@ -147,6 +147,7 @@ export default {
     cancelAddTask(index) {
       this.statuses[index].tasks.pop()
       this.addTaskDisabled = false
+      this.addingStateId = null
     },
     handleError(error) {
       if (error.response && error.response.data) {
@@ -159,7 +160,9 @@ export default {
     showModal(clickedTask){
       this.showTask = clickedTask
       this.dialog = true
-      this.cancelAddTask(this.addingStateId)
+      if (this.addingStateId !== null){
+        this.cancelAddTask(this.addingStateId)
+      }
     }
   },
 }
