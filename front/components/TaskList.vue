@@ -34,7 +34,7 @@
                 </v-text-field>
               </v-card-subtitle>
               <v-card-actions>
-                <v-btn color="#385F73" @click="taskSubmit"> 追加 </v-btn>
+                <v-btn color="#385F73" @click="taskSubmit(task)"> 追加 </v-btn>
                 <v-btn color="#37474F" @click="cancelAddTask(statusIndex)">
                   取消
                 </v-btn>
@@ -128,11 +128,11 @@ export default {
       this.addingStateId = index
       this.addTaskDisabled = true
     },
-    async taskSubmit() {
+    async taskSubmit(submitTask) {
       if (this.newTask.name !== '') {
         try {
-          await axios.post('/v1/tasks', this.newTask)
-          this.newTask.isNew = null
+          await axios.post('/v1/tasks', submitTask)
+          submitTask.isNew = null
           this.addTaskDisabled = false
           this.$emit('taskSubmitted')
         } catch (error) {
