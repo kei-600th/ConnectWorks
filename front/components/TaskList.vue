@@ -101,7 +101,7 @@ export default {
         { name: '実施済み', tasks: [] },
         { name: '完了', tasks: [] },
       ],
-      newTask: { name: '', status: '', project_id: null, isNew: null },
+      newTask: [],
       addTaskDisabled: false,
       dialog: false,
       addingStateId: null,
@@ -118,18 +118,18 @@ export default {
   },
   methods: {
     addTask(index) {
-      this.newTask = {
+      this.newTask.push({
         name: '',
         status: this.statuses[index].name,
         project_id: this.project.id,
         isNew: true,
-      } // タスクの初期値
-      this.statuses[index].tasks.push(this.newTask)
+      }) // タスクの初期値
+      this.statuses[index].tasks.push(this.newTask[this.newTask.length - 1])
       this.addingStateId = index
       this.addTaskDisabled = true
     },
     async taskSubmit(submitTask) {
-      if (this.newTask.name !== '') {
+      if (submitTask.name !== '') {
         try {
           await axios.post('/v1/tasks', submitTask)
           submitTask.isNew = null
