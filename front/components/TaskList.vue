@@ -52,26 +52,35 @@
     <v-dialog
       v-model="dialog"
       width="500"
+      :persistent="persistent"
     >
       <v-card>
         <v-card-title>
           {{ showTask.name }}
         </v-card-title>
-
+        <v-card-text>
+          {{ showTask.status }}
+        </v-card-text>
         <v-card-text>
           タスクの説明を表示
         </v-card-text>
-
         <v-divider></v-divider>
 
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
+          color="primary"
+          text
+          @click="editModal(showTask.status)"
+          >
+          編集
+          </v-btn>
+          <v-btn
             color="primary"
             text
             @click="dialog = false"
           >
-            I accept
+          削除
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -107,7 +116,9 @@ export default {
       dialog: false,
       addingStateId: null,
       // 追加処理中のstatusesの番号
-      showTask: {}
+      showTask: {},
+      isEditing: false,
+      persistent: false,
     }
   },
   created() {
@@ -163,6 +174,12 @@ export default {
       if (this.addingStateId !== null){
         this.cancelAddTask(this.addingStateId)
       }
+    },
+    editModal(test){
+      this.isEditing = true
+      this.persistent = true
+      console.log(test)
+      
     }
   },
 }
