@@ -77,15 +77,6 @@
       </v-card>
     </v-dialog>
 
-
-
-
-
-
-
-
-
-
   </div>
 </template>
 
@@ -113,6 +104,7 @@ export default {
       newTask: { name: '', status: '', project_id: null, isNew: null },
       addTaskDisabled: false,
       dialog: false,
+      addingStateId: null,
       showTask: {}
     }
   },
@@ -133,6 +125,7 @@ export default {
         isNew: true,
       } // タスクの初期値
       this.statuses[index].tasks.push(this.newTask)
+      this.addingStateId = index
       this.addTaskDisabled = true
     },
     async taskSubmit() {
@@ -164,6 +157,7 @@ export default {
     showModal(clickedTask){
       this.showTask = clickedTask
       this.dialog = true
+      this.cancelAddTask(this.addingStateId)
     }
   },
 }
