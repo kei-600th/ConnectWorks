@@ -78,11 +78,18 @@
           編集
           </v-btn>
           <v-btn
+            color="error"
+            text
+            @click="deleteTask()"
+          >
+          削除
+          </v-btn>
+          <v-btn
             color="primary"
             text
             @click="dialog = false"
           >
-          削除
+          戻る
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -246,12 +253,21 @@ export default {
           this.statuses[addIndex].tasks.push(submitTask)
           this.showTask = submitTask
           this.cancelEditModal()
-
         } catch (error) {
           this.handleError(error)
         }
       } else {
         alert('タスク名を入力してください')
+      }
+    },
+    async deleteTask(){
+      try {
+      await axios.delete(`/v1/tasks/${this.showTask.id}`, this.showTask)
+      const deleteIndex = this.statuses.findIndex(item => item.name === this.showTask.status);
+      this.statuses[deleteIndex].tasks.pop()
+      this.dialog = false
+      } catch (error) {
+        this.handleError(error)
       }
     }
   },
