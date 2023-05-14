@@ -7,10 +7,8 @@ class V1::TasksController < ApplicationController
   def create
     task = Task.new(task_params)
     if task.save
-      # 成功した場合にはHTTPステータスコード 201 Created をクライアントに返す
       render json: task, status: :created
     else
-      # 失敗した場合にはHTTPステータスコード 422 Unprocessable Entity をクライアントに返す
       render json: task.errors, status: :unprocessable_entity
     end
   end
@@ -18,10 +16,8 @@ class V1::TasksController < ApplicationController
   def update
     task = Task.find(params[:id])
     if task.update(task_params)
-      # 成功した場合にはHTTPステータスコード 201 Created をクライアントに返す
-      render json: task, status: :created
+      render json: task, status: :ok
     else
-      # 失敗した場合にはHTTPステータスコード 422 Unprocessable Entity をクライアントに返す
       render json: task.errors, status: :unprocessable_entity
     end
   end
@@ -29,10 +25,8 @@ class V1::TasksController < ApplicationController
   def destroy
     task = Task.find(params[:id])
     if task.delete
-      # 成功した場合にはHTTPステータスコード 201 Created をクライアントに返す
-      render json: task, status: :created
+      head :no_content
     else
-      # 失敗した場合にはHTTPステータスコード 422 Unprocessable Entity をクライアントに返す
       render json: task.errors, status: :unprocessable_entity
     end
   end
