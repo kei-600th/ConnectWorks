@@ -1,9 +1,10 @@
 # spec/controllers/projects_controller_spec.rb
+
 require 'rails_helper'
 
 RSpec.describe V1::ProjectsController, type: :controller do
   describe 'POST #create' do
-    # ここにプロジェクト登録機能のテストを記述
+    # プロジェクト作成機能のテストケース
 
     context 'with valid attributes' do
       let(:project_params) { attributes_for(:project) }
@@ -13,15 +14,16 @@ RSpec.describe V1::ProjectsController, type: :controller do
           post :create, params: { project: project_params }
         end.to change(Project, :count).by(1)
       end
+    end
 
-      context 'with invalid attributes' do
-        let(:invalid_project_params) { attributes_for(:project, name: nil) }
+    context 'with invalid attributes' do
+      let(:invalid_project_params) { attributes_for(:project, name: nil) }
 
-        it 'does not create a new project' do
-          expect do
-            post :create, params: { project: invalid_project_params }
-          end.not_to change(Project, :count)
-        end
+      # 無効な属性が与えられた場合、新しいプロジェクトが作成されないことを検証するテストケース
+      it 'does not create a new project' do
+        expect do
+          post :create, params: { project: invalid_project_params }
+        end.not_to change(Project, :count)
       end
     end
   end
