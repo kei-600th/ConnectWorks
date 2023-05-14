@@ -103,9 +103,9 @@
           >
           </v-select>
         </v-card-text>
-        <v-card-text
-        v-model=editTask.describe>
-          <v-textarea>
+        <v-card-text>
+          <v-textarea
+          v-model=editTask.describe>
           </v-textarea>
         </v-card-text>
         <v-divider></v-divider>
@@ -115,6 +115,7 @@
           <v-btn
           color="primary"
           text
+          @click="updateTask(editTask)"
           >
           保存
           </v-btn>
@@ -233,6 +234,25 @@ export default {
     cancelEditModal(){
       this.isEditing = false
       this.persistent = false
+    },
+    async updateTask(submitTask){
+      if (submitTask.name !== '') {
+        try {
+          await axios.put(`/v1/tasks/${submitTask.id}`, submitTask)
+          this.statuses.name = this.showTask.status
+          const deleteIndex = this.statuses.findIndex(item => item.name === this.showTask.status);
+          this.statuses[deleteIndex].tasks.pop()
+          const addIndex = this.statuses.findIndex(item => item.name === submitTask.status);
+          this.statuses[addIndex].tasks.push(submitTask)
+          this.showTask = submitTask
+          this.cancelEditModal()
+
+        } catch (error) {
+          this.handleError(error)
+        }
+      } else {
+        alert('タスク名を入力してください')
+      }
     }
   },
 }
