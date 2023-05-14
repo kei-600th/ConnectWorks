@@ -73,7 +73,7 @@
           <v-btn
           color="primary"
           text
-          @click="editModal(showTask.status)"
+          @click="editModal(showTask)"
           >
           編集
           </v-btn>
@@ -91,20 +91,20 @@
       >
         <v-card-title>
           <v-text-field
-          v-model=showTask.name
+          v-model=editTask.name
           label="タスク名"
           >
           </v-text-field>
         </v-card-title>
         <v-card-text>
           <v-select
-          v-model=showTask.status
+          v-model=editTask.status
           :items="statusNames"
           >
           </v-select>
         </v-card-text>
         <v-card-text
-        v-model=showTask.describe>
+        v-model=editTask.describe>
           <v-textarea>
           </v-textarea>
         </v-card-text>
@@ -160,6 +160,7 @@ export default {
       addingStateId: null,
       // 追加処理中のstatusesの番号
       showTask: {},
+      editTask: {},
       isEditing: false,
       persistent: false,
     }
@@ -223,10 +224,10 @@ export default {
         this.cancelAddTask(this.addingStateId)
       }
     },
-    editModal(test){
+    editModal(showingTask){
+      this.editTask = showingTask
       this.isEditing = true
       this.persistent = true
-      console.log(test)
       
     },
     cancelEditModal(){
