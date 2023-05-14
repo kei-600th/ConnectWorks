@@ -24,7 +24,6 @@ export default {
       project: {
         id: null,
         name: '',
-        tasks: [],
       },
     }
   },
@@ -41,11 +40,9 @@ export default {
       const id = Number(this.$route.params.id)
       try {
         const { data } = await axios.get(`/v1/projects/${id}`)
-        this.project.name = data.name
-        this.project.id = id
-        this.project.tasks = data.tasks
+        this.project = data
       } catch (error) {
-        console.error(error)
+        throw new Error(error)
       }
     },
   },
