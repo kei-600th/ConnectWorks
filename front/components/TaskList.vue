@@ -225,7 +225,7 @@ export default {
       }
     },
     editModal(showingTask){
-      this.editTask = showingTask
+      this.editTask = {...showingTask};
       this.isEditing = true
       this.persistent = true
       
