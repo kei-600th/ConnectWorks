@@ -247,8 +247,12 @@ export default {
         try {
           await axios.put(`/v1/tasks/${submitTask.id}`, submitTask)
           this.statuses.name = this.showTask.status
-          const deleteIndex = this.statuses.findIndex(item => item.name === this.showTask.status);
-          this.statuses[deleteIndex].tasks.pop()
+          const deleteStatusIndex = this.statuses.findIndex(item => item.name === this.showTask.status);
+          const tasksArray = this.statuses[deleteStatusIndex].tasks;
+          const taskIndex = tasksArray.findIndex(task => task.id === this.showTask.id);
+          if (taskIndex !== -1) {
+            tasksArray.splice(taskIndex, 1);
+          }
           const addIndex = this.statuses.findIndex(item => item.name === submitTask.status);
           this.statuses[addIndex].tasks.push(submitTask)
           this.showTask = submitTask
@@ -263,8 +267,12 @@ export default {
     async deleteTask(){
       try {
       await axios.delete(`/v1/tasks/${this.showTask.id}`, this.showTask)
-      const deleteIndex = this.statuses.findIndex(item => item.name === this.showTask.status);
-      this.statuses[deleteIndex].tasks.pop()
+      const deleteStatusIndex = this.statuses.findIndex(item => item.name === this.showTask.status);
+      const tasksArray = this.statuses[deleteStatusIndex].tasks;
+      const taskIndex = tasksArray.findIndex(task => task.id === this.showTask.id);
+      if (taskIndex !== -1) {
+        tasksArray.splice(taskIndex, 1);
+      }
       this.dialog = false
       } catch (error) {
         this.handleError(error)
