@@ -90,13 +90,23 @@
       v-if="isEditing"
       >
         <v-card-title>
-          {{ showTask.name }}
+          <v-text-field
+          v-model=showTask.name
+          label="タスク名"
+          >
+          </v-text-field>
         </v-card-title>
         <v-card-text>
-          {{ showTask.status }}
+          <v-select
+          v-model=showTask.status
+          :items="statusNames"
+          >
+          </v-select>
         </v-card-text>
-        <v-card-text>
-          タスクの説明を表示
+        <v-card-text
+        v-model=showTask.describe>
+          <v-textarea>
+          </v-textarea>
         </v-card-text>
         <v-divider></v-divider>
 
@@ -154,6 +164,11 @@ export default {
       persistent: false,
     }
   },
+  computed: {
+  statusNames() {
+    return this.statuses.map((status) => status.name);
+  },
+},
   created() {
     this.project.tasks.forEach((task) => {
       const status = this.statuses.find((status) => status.name === task.status)
