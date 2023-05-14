@@ -201,8 +201,11 @@ export default {
     async taskSubmit(submitTask) {
       if (submitTask.name !== '') {
         try {
-          await axios.post('/v1/tasks', submitTask)
-          submitTask.isNew = null
+          const response = await axios.post('/v1/tasks', submitTask);
+          const deleteStatusIndex = this.statuses.findIndex(item => item.name === submitTask.status);
+          const tasksArray = this.statuses[deleteStatusIndex].tasks;
+          tasksArray.pop()
+          tasksArray.push(response.data)
           this.addTaskDisabled = false
           this.$emit('taskSubmitted')
         } catch (error) {
