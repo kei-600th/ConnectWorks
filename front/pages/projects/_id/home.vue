@@ -42,7 +42,7 @@ export default {
         const { data } = await axios.get(`/v1/projects/${id}`)
         this.project = data
       } catch (error) {
-        throw new Error(error);
+        throw new Error(error)
       }
     },
   },
